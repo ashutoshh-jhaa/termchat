@@ -10,18 +10,19 @@ let nicknameSet = false;
 client.on("data", (buffer) => {
   const data = buffer.toString().trim();
 
-  if (data === "BYE") {
-    console.log("[CLIENT] Disconnected from chat.");
-    client.end();
-    process.stdin.pause();
-    process.exit(0);
-  } else {
-    console.log(data);
-  }
+  //feels unnecessary
+  // if (data.includes("BYE")) {
+  //   console.log("[CLIENT] Disconnected from chat.");
+  //   client.end();
+  //   process.stdin.pause();
+  //   process.exit(0);
+  // } else {
+  console.log(data);
+  // }
 });
 
 client.on("end", () => {
-  console.log("[CLIENT] Server closed the connection.");
+  console.log("[INFO] Server closed the connection.");
   process.stdin.pause();
   process.exit(0);
 });

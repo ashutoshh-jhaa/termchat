@@ -23,9 +23,12 @@ const server = net.createServer((socket) => {
       return;
     }
 
-    // If 'exit', close client
+    // If 'exit', close client and broadcast this to other clients
     if (input === "exit") {
-      socket.write("BYE\n");
+      const message = `[SERVER] '${nickname}' left the chat`
+      console.log(message);
+      broadcast(message, socket)
+      clients.delete(socket);
       socket.end();
       return;
     }
@@ -43,14 +46,16 @@ const server = net.createServer((socket) => {
     clients.delete(socket);
   });
 
+  //this error gets triggered when client diconnects all of sudden without informing
   socket.on("error", (err) => {
-    console.log(`[SERVER] Error with ${nickname || 'unknown'}: ${err.message}`);
-    clients.delete(socket);
+    // console.log(`[SERVER] Error with ${nickname || 'unknown'}: ${err.message}`);
+    // console.log(clients.get(socket),"left")
   });
 });
 
 function broadcast(message, sender) {
   for (const [client, name] of clients) {
+    //ignore the sender
     if (client !== sender) {
       client.write(message + "\n");
     }
