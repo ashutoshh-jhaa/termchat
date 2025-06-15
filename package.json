@@ -1,0 +1,18 @@
+{
+  "name": "termchat",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "server": "node server.mjs",
+    "client": "node clients/client1.mjs"
+  },
+  "keywords": [
+    "chat",
+    "terminal",
+    "nodejs",
+    "socket",
+    "net"
+  ],
+  "license": "MIT"
+}
